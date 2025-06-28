@@ -1,15 +1,17 @@
 import React from 'react';
 import { Account, Transaction, Currency } from '../types';
 import { formatCurrency } from '../utils/currency';
-import { TrendingUp, TrendingDown, DollarSign, ArrowUpRight, ArrowDownRight } from 'lucide-react';
+import { TrendingUp, TrendingDown, DollarSign, ArrowUpRight, ArrowDownRight, TestTube } from 'lucide-react';
+import TestScenarioRunner from './TestScenarioRunner';
 
 interface DashboardProps {
   accounts: Account[];
   transactions: Transaction[];
   getTotalByCurrency: (currency: Currency) => number;
+  executeTransfer?: (formData: any) => boolean;
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ accounts, transactions, getTotalByCurrency }) => {
+const Dashboard: React.FC<DashboardProps> = ({ accounts, transactions, getTotalByCurrency, executeTransfer }) => {
   const currencies: Currency[] = ['KES', 'USD', 'NGN'];
   
   const getRecentTransactions = (limit: number = 5) => {
@@ -34,6 +36,17 @@ const Dashboard: React.FC<DashboardProps> = ({ accounts, transactions, getTotalB
     return accounts.find(a => a.id === accountId)?.name || 'Unknown';
   };
 
+  const getTransactionStats = () => {
+    const completed = transactions.filter(t => t.status === 'completed').length;
+    const pending = transactions.filter(t => t.status === 'pending').length;
+    const scheduled = transactions.filter(t => t.status === 'scheduled').length;
+    const failed = transactions.filter(t => t.status === 'failed').length;
+    
+    return { completed, pending, scheduled, failed };
+  };
+
+  const stats = getTransactionStats();
+
   return (
     <div className="space-y-6">
       {/* Summary Cards */}
@@ -43,6 +56,7 @@ const Dashboard: React.FC<DashboardProps> = ({ accounts, transactions, getTotalB
             <div>
               <p className="text-sm font-medium text-gray-600">Active Accounts</p>
               <p className="text-2xl font-bold text-gray-900">{getTotalAccounts()}</p>
+              <p className="text-xs text-gray-500 mt-1">{accounts.length - getTotalAccounts()} inactive</p>
             </div>
             <div className="p-3 bg-blue-100 rounded-lg">
               <DollarSign className="w-6 h-6 text-blue-600" />
@@ -55,6 +69,7 @@ const Dashboard: React.FC<DashboardProps> = ({ accounts, transactions, getTotalB
             <div>
               <p className="text-sm font-medium text-gray-600">Total Transactions</p>
               <p className="text-2xl font-bold text-gray-900">{transactions.length}</p>
+              <p className="text-xs text-gray-500 mt-1">{stats.completed} completed</p>
             </div>
             <div className="p-3 bg-green-100 rounded-lg">
               <TrendingUp className="w-6 h-6 text-green-600" />
@@ -67,6 +82,7 @@ const Dashboard: React.FC<DashboardProps> = ({ accounts, transactions, getTotalB
             <div>
               <p className="text-sm font-medium text-gray-600">Today's Transfers</p>
               <p className="text-2xl font-bold text-gray-900">{getTodaysTransactions()}</p>
+              <p className="text-xs text-gray-500 mt-1">{stats.pending} pending</p>
             </div>
             <div className="p-3 bg-orange-100 rounded-lg">
               <ArrowUpRight className="w-6 h-6 text-orange-600" />
@@ -78,9 +94,8 @@ const Dashboard: React.FC<DashboardProps> = ({ accounts, transactions, getTotalB
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-gray-600">Scheduled</p>
-              <p className="text-2xl font-bold text-gray-900">
-                {transactions.filter(t => t.status === 'scheduled').length}
-              </p>
+              <p className="text-2xl font-bold text-gray-900">{stats.scheduled}</p>
+              <p className="text-xs text-red-500 mt-1">{stats.failed} failed</p>
             </div>
             <div className="p-3 bg-purple-100 rounded-lg">
               <TrendingDown className="w-6 h-6 text-purple-600" />
@@ -97,6 +112,7 @@ const Dashboard: React.FC<DashboardProps> = ({ accounts, transactions, getTotalB
             {currencies.map(currency => {
               const total = getTotalByCurrency(currency);
               const accountCount = accounts.filter(a => a.currency === currency && a.isActive).length;
+              const inactiveCount = accounts.filter(a => a.currency === currency && !a.isActive).length;
               
               return (
                 <div key={currency} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
@@ -107,7 +123,9 @@ const Dashboard: React.FC<DashboardProps> = ({ accounts, transactions, getTotalB
                     `} />
                     <div>
                       <p className="font-semibold text-gray-900">{currency}</p>
-                      <p className="text-sm text-gray-600">{accountCount} accounts</p>
+                      <p className="text-sm text-gray-600">
+                        {accountCount} active{inactiveCount > 0 ? `, ${inactiveCount} inactive` : ''}
+                      </p>
                     </div>
                   </div>
                   <div className="text-right">
@@ -139,7 +157,7 @@ const Dashboard: React.FC<DashboardProps> = ({ accounts, transactions, getTotalB
                         {getAccountName(transaction.fromAccountId)} → {getAccountName(transaction.toAccountId)}
                       </p>
                       <p className="text-xs text-gray-600">
-                        {transaction.timestamp.toLocaleDateString()}
+                        {transaction.timestamp.toLocaleDateString()} {transaction.timestamp.toLocaleTimeString()}
                       </p>
                     </div>
                   </div>
@@ -156,6 +174,37 @@ const Dashboard: React.FC<DashboardProps> = ({ accounts, transactions, getTotalB
                 </div>
               ))
             )}
+          </div>
+        </div>
+      </div>
+
+      {/* Test Scenario Runner */}
+      {executeTransfer && (
+        <TestScenarioRunner 
+          accounts={accounts} 
+          executeTransfer={executeTransfer}
+        />
+      )}
+
+      {/* Transaction Status Overview */}
+      <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+        <h3 className="text-lg font-semibold text-gray-900 mb-4">Transaction Status Overview</h3>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="text-center p-4 bg-green-50 rounded-lg">
+            <div className="text-2xl font-bold text-green-600">{stats.completed}</div>
+            <div className="text-sm text-green-700">Completed</div>
+          </div>
+          <div className="text-center p-4 bg-yellow-50 rounded-lg">
+            <div className="text-2xl font-bold text-yellow-600">{stats.pending}</div>
+            <div className="text-sm text-yellow-700">Pending</div>
+          </div>
+          <div className="text-center p-4 bg-blue-50 rounded-lg">
+            <div className="text-2xl font-bold text-blue-600">{stats.scheduled}</div>
+            <div className="text-sm text-blue-700">Scheduled</div>
+          </div>
+          <div className="text-center p-4 bg-red-50 rounded-lg">
+            <div className="text-2xl font-bold text-red-600">{stats.failed}</div>
+            <div className="text-sm text-red-700">Failed</div>
           </div>
         </div>
       </div>

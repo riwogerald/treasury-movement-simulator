@@ -32,6 +32,7 @@ function App() {
             accounts={accounts} 
             transactions={transactions} 
             getTotalByCurrency={getTotalByurrency}
+            executeTransfer={executeTransfer}
           />
         );
       case 'accounts':

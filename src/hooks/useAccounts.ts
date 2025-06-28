@@ -1,12 +1,12 @@
 import { useState, useCallback } from 'react';
 import { Account, Transaction, TransferFormData, Currency } from '../types';
-import { INITIAL_ACCOUNTS } from '../data/constants';
+import { INITIAL_ACCOUNTS, INITIAL_TRANSACTIONS } from '../data/constants';
 import { convertCurrency } from '../utils/currency';
 import { validateTransfer } from '../utils/validation';
 
 export const useAccounts = () => {
   const [accounts, setAccounts] = useState<Account[]>(INITIAL_ACCOUNTS);
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [transactions, setTransactions] = useState<Transaction[]>(INITIAL_TRANSACTIONS);
 
   const updateAccountBalance = useCallback((accountId: string, newBalance: number) => {
     setAccounts(prev => 
@@ -49,7 +49,7 @@ export const useAccounts = () => {
 
     // Create transaction record
     const transaction: Transaction = {
-      id: Date.now().toString(),
+      id: `tx_${Date.now()}`,
       fromAccountId: formData.fromAccountId,
       toAccountId: formData.toAccountId,
       amount: formData.amount,
@@ -69,7 +69,7 @@ export const useAccounts = () => {
 
   const getTotalByurrency = useCallback((currency: Currency): number => {
     return accounts
-      .filter(account => account.currency === currency)
+      .filter(account => account.currency === currency && account.isActive)
       .reduce((total, account) => total + account.balance, 0);
   }, [accounts]);
 
