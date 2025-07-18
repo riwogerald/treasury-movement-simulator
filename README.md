@@ -1,10 +1,10 @@
 # Treasury Movement Simulator
 
+![Treasury Movement Simulator](https://images.pexels.com/photos/259027/pexels-photo-259027.jpeg?auto=compress&cs=tinysrgb&w=1200&h=400&fit=crop)
+
 A sophisticated financial management application for simulating and managing treasury operations across multiple currencies and account types. Built with React, TypeScript, and Tailwind CSS.
 
 ## Live Link: https://timely-torte-b09452.netlify.app/
-
-![Treasury Movement Simulator](https://images.pexels.com/photos/259027/pexels-photo-259027.jpeg?auto=compress&cs=tinysrgb&w=1200&h=400&fit=crop)
 
 ## 🌟 Features
 
@@ -113,11 +113,15 @@ The dashboard provides a comprehensive view of your treasury operations:
 - **Transaction Status**: Breakdown of completed, pending, scheduled, and failed transactions
 - **Test Scenario Runner**: Execute predefined business scenarios
 
+![Main dashboard for the Treasury Movement Simulator.](screenshots/dashboard.png)
+
 ### Managing Accounts
 - View all accounts with their balances, currencies, and status
 - Accounts are categorized by type (Mpesa, Bank, Wallet, Corporate)
 - Active/inactive status management
 - Real-time balance updates after transactions
+
+![Accounts Dashboard.](screenshots/accounts.png)
 
 ### Executing Transfers
 1. Click "New Transfer" or select an account for quick transfer
@@ -145,6 +149,8 @@ Execute predefined business scenarios:
 - **Investment Rebalancing**: Portfolio management
 - **Scheduled Transfers**: Future payment automation
 - **Stress Testing**: System performance validation
+
+![Tests Scenarios.](screenshots/tests.png)
 
 ## 🔧 Configuration
 
