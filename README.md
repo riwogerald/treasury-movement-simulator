@@ -121,7 +121,7 @@ The dashboard provides a comprehensive view of your treasury operations:
 - Active/inactive status management
 - Real-time balance updates after transactions
 
-![Accounts Dashboard.](screenshots/accounts.png)
+![Accounts.](screenshots/accounts.png)
 
 ### Executing Transfers
 1. Click "New Transfer" or select an account for quick transfer
@@ -131,12 +131,16 @@ The dashboard provides a comprehensive view of your treasury operations:
 5. Review exchange rates for cross-currency transfers
 6. Submit for immediate processing or future scheduling
 
+![New Transfer.](screenshots/transfer.png)
+
 ### Transaction History
 - Comprehensive transaction log with all transfer details
 - Advanced filtering by currency, account, date range
 - Search functionality across account names and notes
 - Status indicators for different transaction states
 - Export capabilities for reporting
+
+![History.](screenshots/history.png)
 
 ### Test Scenarios
 Execute predefined business scenarios:
