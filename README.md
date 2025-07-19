@@ -4,7 +4,7 @@
 
 A sophisticated financial management application for simulating and managing treasury operations across multiple currencies and account types. Built with React, TypeScript, and Tailwind CSS.
 
-## Live Link: https://timely-torte-b09452.netlify.app/
+## Live Link: [https://timely-torte-b09452.netlify.app/](https://treasury-move-sim.netlify.app/)
 
 ## 🌟 Features
 
