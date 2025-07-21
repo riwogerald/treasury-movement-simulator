@@ -132,6 +132,7 @@ The dashboard provides a comprehensive view of your treasury operations:
 6. Submit for immediate processing or future scheduling
 
 ![New Transfer.](screenshots/transfer.png)
+![New Transfer.](screenshots/transfer2.png)
 
 ### Transaction History
 - Comprehensive transaction log with all transfer details
@@ -141,6 +142,7 @@ The dashboard provides a comprehensive view of your treasury operations:
 - Export capabilities for reporting
 
 ![History.](screenshots/history.png)
+![History.](screenshots/history2.png)
 
 ### Test Scenarios
 Execute predefined business scenarios:
@@ -155,6 +157,7 @@ Execute predefined business scenarios:
 - **Stress Testing**: System performance validation
 
 ![Tests Scenarios.](screenshots/tests.png)
+![Tests Scenarios.](screenshots/tests2.png)
 
 ## 🔧 Configuration
 
