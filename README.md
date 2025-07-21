@@ -156,9 +156,6 @@ Execute predefined business scenarios:
 - **Scheduled Transfers**: Future payment automation
 - **Stress Testing**: System performance validation
 
-![Tests Scenarios.](screenshots/tests.png)
-![Tests Scenarios.](screenshots/tests2.png)
-
 ## 🔧 Configuration
 
 ### Exchange Rates
@@ -283,6 +280,10 @@ Built-in test scenarios validate:
 - Account balance validation
 - Scheduled transfer functionality
 - Error handling and edge cases
+
+Here's how the test scenarios are shown:
+![Tests Scenarios.](screenshots/tests.png)
+![Tests Scenarios.](screenshots/tests2.png)
 
 ## 🔒 Security Considerations
 
