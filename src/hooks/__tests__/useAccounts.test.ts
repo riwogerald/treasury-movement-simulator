@@ -11,8 +11,8 @@ describe('useAccounts Hook', () => {
   });
 
   it('should initialize with default accounts', () => {
-    expect(hook.result.current.accounts).toHaveLength(10);
-    expect(hook.result.current.transactions).toHaveLength(0);
+    expect(hook.result.current.accounts).toHaveLength(15);
+    expect(hook.result.current.transactions).toHaveLength(20);
   });
 
   it('should have accounts with correct currencies', () => {
@@ -65,7 +65,7 @@ describe('useAccounts Hook', () => {
 
     expect(updatedFromAccount?.balance).toBe(initialFromBalance - transferAmount);
     expect(updatedToAccount?.balance).toBe(initialToBalance + transferAmount);
-    expect(transactions).toHaveLength(1);
+    expect(transactions).toHaveLength(21); // 20 initial + 1 new
     expect(transactions[0].amount).toBe(transferAmount);
     expect(transactions[0].status).toBe('completed');
   });
@@ -102,7 +102,7 @@ describe('useAccounts Hook', () => {
 
     expect(updatedFromAccount?.balance).toBe(initialFromBalance - transferAmount);
     expect(updatedToAccount?.balance).toBe(initialToBalance + expectedConvertedAmount);
-    expect(transactions).toHaveLength(1);
+    expect(transactions).toHaveLength(21); // 20 initial + 1 new
     expect(transactions[0].convertedAmount).toBe(expectedConvertedAmount);
     expect(transactions[0].convertedCurrency).toBe('KES');
     expect(transactions[0].exchangeRate).toBe(132.50);
@@ -125,7 +125,7 @@ describe('useAccounts Hook', () => {
       expect(success).toBe(false);
     });
 
-    expect(hook.result.current.transactions).toHaveLength(0);
+    expect(hook.result.current.transactions).toHaveLength(20); // Should remain unchanged on failed transfer
   });
 
   it('should create scheduled transfer', () => {
@@ -153,7 +153,7 @@ describe('useAccounts Hook', () => {
     });
 
     const { transactions } = hook.result.current;
-    expect(transactions).toHaveLength(1);
+    expect(transactions).toHaveLength(21); // 20 initial + 1 new
     expect(transactions[0].status).toBe('scheduled');
     expect(transactions[0].scheduledDate).toEqual(futureDate);
   });
@@ -187,7 +187,7 @@ describe('useAccounts Hook', () => {
     });
 
     const { transactions } = hook.result.current;
-    expect(transactions).toHaveLength(2);
+    expect(transactions).toHaveLength(22); // 20 initial + 2 new
     expect(transactions[0].note).toBe('Second transfer'); // Newest first
     expect(transactions[1].note).toBe('First transfer');
   });
