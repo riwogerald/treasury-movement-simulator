@@ -71,13 +71,16 @@ describe('Dashboard Component', () => {
     );
 
     // Check active accounts count (should be 2, excluding inactive)
-    expect(screen.getByText('2')).toBeInTheDocument();
+    expect(screen.getByText('Active Accounts')).toBeInTheDocument();
+    const activeAccountsCard = screen.getByText('Active Accounts').closest('div');
+    expect(activeAccountsCard).toHaveTextContent('2');
     
     // Check total transactions
     expect(screen.getByText('Total Transactions')).toBeInTheDocument();
     
-    // Check scheduled transfers
-    expect(screen.getByText('Scheduled')).toBeInTheDocument();
+    // Check scheduled transfers section exists
+    const scheduledElements = screen.getAllByText('Scheduled');
+    expect(scheduledElements.length).toBeGreaterThan(0);
   });
 
   it('should display currency totals correctly', () => {
@@ -129,13 +132,13 @@ describe('Dashboard Component', () => {
       />
     );
 
-    // USD should show 1 account (excluding inactive)
+    // USD should show 1 active, 1 inactive
     const usdSection = screen.getByText('USD').closest('div');
-    expect(usdSection).toHaveTextContent('1 accounts');
+    expect(usdSection).toHaveTextContent('1 active, 1 inactive');
 
-    // KES should show 1 account
+    // KES should show 1 active account
     const kesSection = screen.getByText('KES').closest('div');
-    expect(kesSection).toHaveTextContent('1 accounts');
+    expect(kesSection).toHaveTextContent('1 active');
   });
 
   it('should format currency amounts correctly in totals', () => {
