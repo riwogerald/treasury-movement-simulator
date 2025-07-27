@@ -54,6 +54,11 @@ export const validateTransfer = (
 };
 
 export const validateAmount = (amount: string): boolean => {
+  // Check if the string is a valid number (no trailing non-numeric characters)
+  if (!/^\d*\.?\d+$/.test(amount.trim())) {
+    return false;
+  }
+  
   const num = parseFloat(amount);
   return !isNaN(num) && num > 0 && num <= 999999999;
 };
