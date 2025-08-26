@@ -67,7 +67,7 @@ export const useAccounts = () => {
     return true;
   }, [accounts, updateAccountBalance]);
 
-  const getTotalByurrency = useCallback((currency: Currency): number => {
+  const getTotalByCurrency = useCallback((currency: Currency): number => {
     return accounts
       .filter(account => account.currency === currency)
       .reduce((total, account) => total + account.balance, 0);
@@ -77,6 +77,6 @@ export const useAccounts = () => {
     accounts,
     transactions,
     executeTransfer,
-    getTotalByurrency
+    getTotalByCurrency
   };
 };

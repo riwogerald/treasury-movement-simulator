@@ -7,7 +7,7 @@ import Dashboard from './components/Dashboard';
 import { Plus, BarChart3, History, CreditCard, Menu, X } from 'lucide-react';
 
 function App() {
-  const { accounts, transactions, executeTransfer, getTotalByurrency } = useAccounts();
+  const { accounts, transactions, executeTransfer, getTotalByCurrency } = useAccounts();
   const [isTransferModalOpen, setIsTransferModalOpen] = useState(false);
   const [selectedAccount, setSelectedAccount] = useState<string>('');
   const [activeTab, setActiveTab] = useState<'dashboard' | 'accounts' | 'history'>('dashboard');
@@ -31,7 +31,7 @@ function App() {
           <Dashboard 
             accounts={accounts} 
             transactions={transactions} 
-            getTotalByCurrency={getTotalByurrency}
+            getTotalByCurrency={getTotalByCurrency}
           />
         );
       case 'accounts':
