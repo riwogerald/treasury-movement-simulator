@@ -4,13 +4,14 @@ import AccountCard from './components/AccountCard';
 import TransferModal from './components/TransferModal';
 import TransactionHistory from './components/TransactionHistory';
 import Dashboard from './components/Dashboard';
-import { Plus, BarChart3, History, CreditCard, Menu, X } from 'lucide-react';
+import { AdvancedReports } from './components/AdvancedReports';
+import { Plus, BarChart3, History, CreditCard, Menu, X, FileText } from 'lucide-react';
 
 function App() {
   const { accounts, transactions, executeTransfer, getTotalByCurrency } = useAccounts();
   const [isTransferModalOpen, setIsTransferModalOpen] = useState(false);
   const [selectedAccount, setSelectedAccount] = useState<string>('');
-  const [activeTab, setActiveTab] = useState<'dashboard' | 'accounts' | 'history'>('dashboard');
+  const [activeTab, setActiveTab] = useState<'dashboard' | 'accounts' | 'history' | 'reports'>('dashboard');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleQuickTransfer = (accountId: string) => {
@@ -21,7 +22,8 @@ function App() {
   const tabs = [
     { id: 'dashboard', label: 'Dashboard', icon: BarChart3 },
     { id: 'accounts', label: 'Accounts', icon: CreditCard },
-    { id: 'history', label: 'History', icon: History }
+    { id: 'history', label: 'History', icon: History },
+    { id: 'reports', label: 'Reports & Analytics', icon: FileText }
   ] as const;
 
   const renderContent = () => {
@@ -61,6 +63,8 @@ function App() {
         );
       case 'history':
         return <TransactionHistory transactions={transactions} accounts={accounts} />;
+      case 'reports':
+        return <AdvancedReports accounts={accounts} transactions={transactions} />;
       default:
         return null;
     }
