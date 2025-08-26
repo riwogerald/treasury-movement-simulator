@@ -152,7 +152,7 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
     convertedCurrency: 'USD',
     exchangeRate: 0.0075,
     note: 'Recent cross-currency',
-    timestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000), // 2 days ago
+    timestamp: new Date('2024-08-24T10:30:00Z'),
     status: 'completed'
   },
   {
@@ -165,7 +165,7 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
     convertedCurrency: 'NGN',
     exchangeRate: 790.25,
     note: 'Emergency transfer',
-    timestamp: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000), // 1 day ago
+    timestamp: new Date('2024-08-25T14:15:00Z'),
     status: 'completed'
   },
   {
@@ -177,8 +177,8 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
     convertedAmount: 375,
     convertedCurrency: 'USD',
     exchangeRate: 0.0075,
-    note: 'Today\'s transfer',
-    timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000), // 2 hours ago
+    note: 'Recent transfer',
+    timestamp: new Date('2024-08-26T08:30:00Z'),
     status: 'completed'
   },
   // Pending and scheduled transactions for testing
@@ -192,7 +192,7 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
     convertedCurrency: 'KES',
     exchangeRate: 0.168,
     note: 'Pending approval',
-    timestamp: new Date(),
+    timestamp: new Date('2024-08-26T12:00:00Z'),
     status: 'pending'
   },
   {
@@ -205,8 +205,8 @@ export const INITIAL_TRANSACTIONS: Transaction[] = [
     convertedCurrency: 'NGN',
     exchangeRate: 790.25,
     note: 'Scheduled monthly payment',
-    timestamp: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days from now
+    timestamp: new Date('2024-09-02T10:00:00Z'),
     status: 'scheduled',
-    scheduledDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+    scheduledDate: new Date('2024-09-02T10:00:00Z')
   }
 ];
