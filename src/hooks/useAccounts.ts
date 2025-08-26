@@ -1,6 +1,6 @@
 import { useState, useCallback, useMemo } from 'react';
 import { Account, Transaction, TransferFormData, Currency, DateRange, AnalyticsData, DashboardMetrics } from '../types';
-import { INITIAL_ACCOUNTS } from '../data/constants';
+import { INITIAL_ACCOUNTS, INITIAL_TRANSACTIONS } from '../data/constants';
 import { convertCurrency } from '../utils/currency';
 import { validateTransfer } from '../utils/validation';
 import { 
@@ -16,7 +16,7 @@ import {
 
 export const useAccounts = () => {
   const [accounts, setAccounts] = useState<Account[]>(INITIAL_ACCOUNTS);
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [transactions, setTransactions] = useState<Transaction[]>(INITIAL_TRANSACTIONS);
 
   const updateAccountBalance = useCallback((accountId: string, newBalance: number) => {
     setAccounts(prev => 
