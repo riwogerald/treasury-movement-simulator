@@ -50,6 +50,11 @@ npm run build
 npm run preview
 ```
 
+### Application Overview
+
+![Dashboard Overview](screenshots/dashboard.png)
+*Main dashboard showing account overview, recent transactions, and quick actions*
+
 ## 📊 Analytics Features
 
 ### Overview Dashboard
@@ -86,7 +91,16 @@ Get a quick overview of your treasury operations with:
 - **Currency Filtering**: Filter data by specific currency
 - **Real-time Refresh**: Update analytics with latest data
 
+![Analytics Dashboard](screenshots/analytics.png)
+*Interactive analytics dashboard with charts, KPIs, and risk assessment*
+
 ### Report Generator
+
+![Reports Overview](screenshots/reports_overview.png)
+*Reports and analytics overview with quick access to different report types*
+
+![Report Generator](screenshots/report_generator.png)
+*Advanced report generation interface with customization options*
 
 #### Report Types
 
@@ -193,8 +207,19 @@ Central state management with extended analytics capabilities:
 
 1. **View Dashboard**: Navigate to the Dashboard tab for overview metrics
 2. **Manage Accounts**: Use the Accounts tab to view account details
+
+![Account Management](screenshots/accounts.png)
+*Account management interface showing all accounts with balances and details*
+
 3. **Execute Transfers**: Click "New Transfer" to move funds between accounts
+
+![New Transfer](screenshots/new_transfer.png)
+*Transfer creation form with currency conversion and validation*
+
 4. **View History**: Check the History tab for transaction records
+
+![Transaction History](screenshots/history.png)
+*Complete transaction history with filtering and status information*
 
 ### Advanced Analytics
 
