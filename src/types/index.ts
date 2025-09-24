@@ -46,6 +46,7 @@ export interface FilterOptions {
   dateFrom?: string;
   dateTo?: string;
   searchTerm?: string;
+  status?: TransactionStatus;
 }
 
 // Analytics Types
